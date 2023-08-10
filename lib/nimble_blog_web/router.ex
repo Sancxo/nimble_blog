@@ -17,9 +17,8 @@ defmodule NimbleBlogWeb.Router do
   scope "/", NimbleBlogWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
-    get "/blog", BlogController, :index
-    get "/blog/:id", BlogController, :show
+    get "/", BlogController, :index
+    get "/:id", BlogController, :show
   end
 
   # Other scopes may use custom stacks.
