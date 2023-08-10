@@ -4,7 +4,7 @@ defmodule NimbleBlogWeb.PageController do
   def home(conn, _params) do
     # The home page is often custom made,
     # so skip the default app layout.
+    redirect(conn, to: ~p"/blog")
     # render(conn, :home, layout: false)
-    render(conn, external: "https://simontirant.dev/")
   end
 end
