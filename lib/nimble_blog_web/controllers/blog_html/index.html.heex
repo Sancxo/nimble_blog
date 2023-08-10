@@ -3,7 +3,7 @@
 <%= for post <- @posts do %>
   <div id={post.id} class="post-item" style="margin-bottom: 3rem;">
     <h2>
-      <.link patch={"/blog/#{post.id}"}><%= post.title %></.link>
+      <.link patch={"/#{post.id}"}><%= post.title %></.link>
     </h2>
 
     <p>
