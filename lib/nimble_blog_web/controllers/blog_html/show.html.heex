@@ -1,0 +1,13 @@
+<.link patch="/blog">← All posts</.link>
+
+<article class="post">
+  <h1><%= @post.title %></h1>
+
+  <p><time><%= @post.date %></time> by <%= @post.author %></p>
+
+  <p>Tagged as <%= Enum.join(@post.tags, ", ") %></p>
+
+  <div class="post-body">
+    <%= raw @post.body %>
+  </div>
+</article>

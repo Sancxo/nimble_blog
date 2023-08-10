@@ -1,0 +1,182 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+/* This file is for your main application CSS */
+
+/* Fira */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;400&display=swap');
+/* Fira Code */
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@300&display=swap');
+/* Bungee Family */
+@import url('https://fonts.googleapis.com/css2?family=Bungee&family=Bungee+Hairline&family=Bungee+Inline&family=Bungee+Outline&family=Bungee+Shade&display=swap');
+
+:root {
+  --white: #F8F8FF;
+  --black: #161616;
+  --futureBlue: #15abbe;
+  --neonBlue: #04d9ff;
+  --neonFuchsia: #fe4164;
+  --neonGreen: #39ff14;
+  --ultraViolet: #6B5B95;
+  --galaxyBlue: #2A4B7C;
+  --code: "Fira Code", monospace;
+  --pixel: "Bungee Shade", cursive;
+  --pixel-hair: "Bungee Hairline", cursive;
+}
+
+*::selection {
+  background: var(--ultraViolet);
+  color: var(--white);
+}
+
+body {
+  background: var(--black);
+  color: var(--white);
+  font-family: var(--code);
+  /* opacity: 0;
+  animation: 1250ms ease-out 500ms forwards var(--onloadOpacity); */
+}
+
+a {
+  color: var(--white);
+  transition: color 50ms linear;
+}
+
+a:hover {
+  color: var(--ultraViolet);
+}
+
+.post-item a::before {
+  font-family: var(--pixel-hair);
+  font-size: 20px;
+  font-weight: bold;
+  content: "|> ";
+}
+
+.post-item a {
+  color: var(--neonBlue);
+  transition: color 50ms linear;
+}
+
+.post-item a:hover {
+  color: var(--neonFuchsia);
+}
+
+#brand-logo a {
+  transition: color 500ms, text-shadow 500ms;
+}
+
+#brand-logo a:hover {
+  color: var(--neonGreen);
+  cursor: pointer;
+  animation: glitch-anim 750ms infinite;
+  /* animation: ${GlitchBrand} 100ms 500ms backwards; */
+}
+
+#brand-logo a:hover::after {
+  color: var(--neonGreen);
+  font-family: var(--code);
+  font-size: 24px;
+  opacity: 0;
+  animation: 250ms ease-in-out forwards on-hover-opac;
+  text-shadow: 0 0 1em var(--neonGreen);
+
+  content: "← Return to website";
+}
+
+@keyframes on-hover-opac {
+  from {
+    opacity: 0
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+@keyframes glitch-anim {
+  0% {
+    transform: skew(8deg);
+  }
+
+  5% {
+    transform: skew(8deg);
+  }
+
+  10% {
+    transform: skew(-2deg);
+  }
+
+  15% {
+    transform: skew(-1deg);
+  }
+
+  20% {
+    transform: skew(1deg);
+  }
+
+  25% {
+    transform: skew(1deg);
+  }
+
+  30% {
+    transform: skew(1deg);
+  }
+
+  35% {
+    transform: skew(0deg);
+  }
+
+  40% {
+    transform: skew(5deg);
+  }
+
+  45% {
+    transform: skew(0deg);
+  }
+
+  50% {
+    transform: skew(-5deg);
+  }
+
+  55% {
+    transform: skew(-5deg);
+  }
+
+  60% {
+    transform: skew(-5deg);
+  }
+
+  65% {
+    transform: skew(2deg);
+  }
+
+  70% {
+    transform: skew(-2deg);
+  }
+
+  75% {
+    transform: skew(3deg);
+  }
+
+  80% {
+    transform: skew(8deg);
+  }
+
+  85% {
+    transform: skew(8deg);
+  }
+
+  90% {
+    transform: skew(8deg);
+  }
+
+  95% {
+    transform: skew(8deg);
+  }
+
+  100% {
+    transform: skew(-3deg);
+  }
+}
