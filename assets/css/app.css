@@ -47,12 +47,12 @@ a:hover {
   color: var(--ultraViolet);
 }
 
-.post-item a::before {
+/* .post-item a::before {
   font-family: var(--pixel-hair);
   font-size: 20px;
   font-weight: bold;
   content: "|> ";
-}
+} */
 
 .post-item a {
   color: var(--neonBlue);

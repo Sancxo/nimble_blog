@@ -13,7 +13,8 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      'pixel': ['"Bungee Shade"', 'cursive']
+      'pixel': ['"Bungee Shade"', 'cursive'],
+      'pixel-hair': ['"Bungee Hairline", cursive']
     },
     colors: { 'black': "#161616", 'white': '#F8F8FF', 'future-blue': '#15abbe' },
     extend: {

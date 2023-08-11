@@ -1,10 +1,13 @@
-<h1>All blog posts: </h1>
+<h2 class="">All blog posts: </h2>
 
 <%= for post <- @posts do %>
   <div id={post.id} class="post-item" style="margin-bottom: 3rem;">
-    <h2>
-      <.link patch={"/#{post.id}"}><%= post.title %></.link>
-    </h2>
+    <h3>
+      <.link patch={"/#{post.id}"}>
+        <img src={post.illustration} />
+        <span class="font-pixel-hair text-xl font-bold">|></span> <%= post.title %>
+      </.link>
+    </h3>
 
     <p>
       <time><%= post.date %></time> by <%= post.author %>
