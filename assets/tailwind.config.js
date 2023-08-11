@@ -30,6 +30,13 @@ module.exports = {
     //
     //     <div class="phx-click-loading:animate-ping">
     //
+    plugin(function ({ addBase, theme }) {
+      addBase({
+        'h1': { fontSize: '2em', margin: '0.67em 0', fontWeight: 'bold' },
+        'h2': { fontSize: '1.5em', margin: '0.83rem 0', fontWeight: 'bold' },
+        'h3': { fontSize: '1.17em', margin: `${theme('spacing.4')} 0`, fontWeight: 'bold' },
+      })
+    }),
     plugin(({ addVariant }) => addVariant("phx-no-feedback", [".phx-no-feedback&", ".phx-no-feedback &"])),
     plugin(({ addVariant }) => addVariant("phx-click-loading", [".phx-click-loading&", ".phx-click-loading &"])),
     plugin(({ addVariant }) => addVariant("phx-submit-loading", [".phx-submit-loading&", ".phx-submit-loading &"])),
