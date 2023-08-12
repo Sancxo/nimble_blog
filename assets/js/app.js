@@ -39,9 +39,29 @@ liveSocket.connect()
 // >> liveSocket.disableLatencySim()
 window.liveSocket = liveSocket
 
+// Script to make Earmark's Markdown links to target _blank with noreferrer :
 blogPostLinks = document.querySelectorAll("article.post div.post-body a");
 for (let link = 0; link < blogPostLinks.length; link++) {
   blogPostLinks[link].setAttribute("rel", "noreferrer");
   blogPostLinks[link].setAttribute("target", "_blank");
 }
 
+// Script to display the go_up_arrow component to display only when we scroll down :
+const goUpArrow = document.querySelector('#go-up-arrow');
+let timeout; // Pointer so we can clean the setTimeout
+
+goUpArrow.style.display = 'none';
+
+function displayArrow() {
+  const scrollPos = window.scrollY;
+
+  goUpArrow.style.display = scrollPos <= 100 ? "none" : "block";
+  timeout = setTimeout(() => { if (scrollPos === window.scrollY && (!goUpArrow.matches(':hover'))) goUpArrow.style.display = "none" }, 2000);
+}
+
+goUpArrow.addEventListener('mouseout', _ => displayArrow());
+window.addEventListener('scroll', _ => displayArrow());
+
+// cleaning functions
+goUpArrow.removeEventListener('mouseout', _ => displayArrow());
+window.removeEventListener('scroll', _ => displayArrow());
