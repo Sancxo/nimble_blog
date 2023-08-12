@@ -16,7 +16,12 @@ module.exports = {
       'pixel': ['"Bungee Shade"', 'cursive'],
       'pixel-hair': ['"Bungee Hairline", cursive']
     },
-    colors: { 'black': "#161616", 'white': '#F8F8FF', 'future-blue': '#15abbe' },
+    colors: {
+      'black': "#161616",
+      'white': '#F8F8FF',
+      'future-blue': '#15abbe',
+      'ultra-violet': '#6B5B95'
+    },
     extend: {
       colors: {
         brand: "#FD4F00",
