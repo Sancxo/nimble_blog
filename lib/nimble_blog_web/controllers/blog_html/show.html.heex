@@ -5,7 +5,12 @@
 
   <p><time><%= @post.date %></time> by <%= @post.author %></p>
 
-  <p>Tagged as <%= Enum.join(@post.tags, ", ") %></p>
+  <p id="post-tags">
+    Tagged as
+    <%= for tag <- @post.tags do %>
+      <.link patch={"/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
+    <% end %>
+  </p>
 
   <div class="post-body">
     <%= raw @post.body %>

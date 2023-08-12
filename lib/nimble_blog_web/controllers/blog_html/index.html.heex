@@ -3,7 +3,7 @@
 <%= for post <- @posts do %>
   <div id={post.id} class="post-item" style="margin-bottom: 3rem;">
     <h3>
-      <.link patch={"/#{post.id}"}>
+      <.link patch={"/post/#{post.id}"}>
         <img src={post.illustration} />
         <span class="font-pixel-hair text-xl font-bold">|></span> <%= post.title %>
       </.link>
@@ -13,8 +13,11 @@
       <time><%= post.date %></time> by <%= post.author %>
     </p>
 
-    <p>
-      Tagged as <%= Enum.join(post.tags, ", ") %>
+    <p id="post-tags">
+      Tagged as
+      <%= for tag <- post.tags do %>
+        <.link patch={"/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
+      <% end %>
     </p>
 
     <%= raw(post.description) %>
