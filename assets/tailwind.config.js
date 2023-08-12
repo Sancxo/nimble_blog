@@ -39,7 +39,13 @@ module.exports = {
       addBase({
         'h1': { fontSize: '2em', margin: '0.67em 0', fontWeight: 'bold' },
         'h2': { fontSize: '1.5em', margin: '0.83rem 0', fontWeight: 'bold' },
-        'h3': { fontSize: '1.17em', margin: `${theme('spacing.4')} 0`, fontWeight: 'bold' },
+        'h3': { fontSize: '1.17em', margin: `1em 0`, fontWeight: 'bold' },
+        'p': { margin: '1em 0' },
+        'pre': { margin: '1em 0' },
+        'img': { margin: 'auto' },
+        'blockquote': { margin: '1em 40px' },
+        'dl': { margin: '1em 0' },
+        'dd': { margin: '0 0 0 40px' }
       })
     }),
     plugin(({ addVariant }) => addVariant("phx-no-feedback", [".phx-no-feedback&", ".phx-no-feedback &"])),

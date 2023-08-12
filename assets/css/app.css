@@ -39,12 +39,13 @@ body {
 }
 
 a {
-  color: var(--white);
+  color: var(--ultraViolet);
   transition: color 50ms linear;
+  font-weight: bold;
 }
 
 a:hover {
-  color: var(--ultraViolet);
+  color: var(--neonFuchsia);
 }
 
 .post-item a:not(.text-ultra-violet) {

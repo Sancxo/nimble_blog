@@ -4,7 +4,7 @@
   <div id={post.id} class="post-item" style="margin-bottom: 3rem;">
     <h3>
       <.link patch={"/post/#{post.id}"}>
-        <img src={post.illustration} />
+        <img src={post.illustration} class="mx-auto my-8" />
         <span class="font-pixel-hair text-xl font-bold">|></span> <%= post.title %>
       </.link>
     </h3>
