@@ -1,6 +1,7 @@
 <.link patch="/">← All blog posts</.link>
 
 <article class="post">
+  <img src={@post.illustration} alt={@post.illustration_alt} class="w-full mx-auto my-8" />
   <h1><%= @post.title %></h1>
 
   <p><time><%= @post.date %></time> by <%= @post.author %></p>
