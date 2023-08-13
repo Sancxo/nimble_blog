@@ -42,4 +42,15 @@ defmodule NimbleBlog.Blog do
       posts -> posts
     end
   end
+
+  def get_time_from_now(date) do
+    Date.utc_today()
+    |> Date.diff(date)
+    |> case do
+      d when d == 0 -> "today"
+      d when d < 31 -> "#{d} day(s) ago"
+      m when m < 365 -> "#{(m / 31) |> floor()} month(s) ago"
+      y -> "#{(y / 365) |> floor()} year(s) ago"
+    end
+  end
 end

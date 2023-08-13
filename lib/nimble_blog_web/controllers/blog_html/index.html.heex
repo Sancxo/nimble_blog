@@ -2,6 +2,10 @@
 
 <%= for post <- @posts do %>
   <div id={post.id} class="post-item" style="margin-bottom: 3rem;">
+    <p><%= post.author %>, <%= post.date |> Blog.get_time_from_now() %>:</p>
+
+    <%= raw(post.description) %>
+
     <h3>
       <.link patch={"/post/#{post.id}"}>
         <img src={post.illustration} class="mx-auto my-8" />
@@ -9,17 +13,11 @@
       </.link>
     </h3>
 
-    <p>
-      <time><%= post.date %></time> by <%= post.author %>
-    </p>
-
     <p id="post-tags">
       Tagged as
       <%= for tag <- post.tags do %>
         <.link patch={"/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
       <% end %>
     </p>
-
-    <%= raw(post.description) %>
   </div>
 <% end %>
