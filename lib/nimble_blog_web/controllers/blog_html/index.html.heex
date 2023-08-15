@@ -18,6 +18,7 @@
       <%= for tag <- post.tags do %>
         <.link patch={"/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
       <% end %>
+      - <%= post.body |> Blog.get_reading_duration() %> min read
     </p>
   </div>
 <% end %>

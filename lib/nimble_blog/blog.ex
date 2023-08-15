@@ -14,6 +14,9 @@ defmodule NimbleBlog.Blog do
   # Let's also get all tags
   @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
 
+  @img_read_time 12
+  @words_read_time 275
+
   # And finally export them
   def all_posts, do: @posts
   def all_tags, do: @tags
@@ -51,6 +54,43 @@ defmodule NimbleBlog.Blog do
       d when d < 31 -> "#{d} day(s) ago"
       m when m < 365 -> "#{(m / 31) |> floor()} month(s) ago"
       y -> "#{(y / 365) |> floor()} year(s) ago"
+    end
+  end
+
+  def get_reading_duration(post) do
+    img_time =
+      ~r/<(img)([\w\W]+?)[\/]?>/
+      |> Regex.scan(post, capture: :first)
+      |> Enum.count()
+      |> case do
+        count when count > 10 ->
+          (count / 2 * (@img_read_time + 3) + (count - 10) * 3) / 60
+
+        count ->
+          count / 2 * (2 * @img_read_time + (1 - count)) / 60
+      end
+
+    html_tag_pattern = ~r/<\w+(\s+("[^"]*"|\\'[^\\']*\'|[^>])+)?>|<\/\w+>/i
+
+    untagged_post =
+      post
+      |> String.trim()
+      |> String.replace(html_tag_pattern, "")
+
+    word_count =
+      ~r/\w+/
+      |> Regex.scan(untagged_post, capture: :first)
+      |> Enum.count()
+
+    word_time = word_count / @words_read_time
+
+    (img_time + word_time)
+    |> case do
+      time when time < 0.5 ->
+        "< 1"
+
+      time ->
+        "#{time |> round()}"
     end
   end
 end
