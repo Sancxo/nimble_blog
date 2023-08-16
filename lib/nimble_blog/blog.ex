@@ -33,6 +33,7 @@ defmodule NimbleBlog.Blog do
   # def recent_posts, do: Enum.take(all_posts(), 3)
 
   defmodule NotFoundError, do: defexception([:message, plug_status: 404])
+  defmodule NoTagError, do: defexception([:message, plug_status: 261])
 
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||
@@ -41,7 +42,7 @@ defmodule NimbleBlog.Blog do
 
   def get_posts_by_tag!(tag) do
     case Enum.filter(all_posts(), &(tag in &1.tags)) do
-      [] -> raise NotFoundError, "posts with tag=#{tag} not found"
+      [] -> raise NoTagError, "posts with tag=#{tag} not found"
       posts -> posts
     end
   end
