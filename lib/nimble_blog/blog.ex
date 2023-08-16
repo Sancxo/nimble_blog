@@ -15,7 +15,7 @@ defmodule NimbleBlog.Blog do
   @tags @posts |> Enum.flat_map(& &1.tags) |> Enum.uniq() |> Enum.sort()
 
   @img_read_time 12
-  @words_read_time 275
+  @words_read_time 265
 
   # And finally export them
   def all_posts, do: @posts
