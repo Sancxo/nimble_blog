@@ -44,8 +44,8 @@ defmodule NimbleBlog.Blog do
   Gets the list of posts filtered by a specific tag or language or a combination of both.
 
   Example:
-      iex> get_posts_by_filters!(%{tag: "elixir", lang: "english"})
-      [%Post{lang: "english", tags: ["elixir", ...]}, ...]
+      iex> get_posts_by_filters!(%{tag: "elixir", lang: "en"})
+      [%Post{lang: "en", tags: ["elixir", ...]}, ...]
   """
   @spec get_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) :: [%Post{}]
   def get_posts_by_filters!(%{"tag" => "all", "lang" => "all"}), do: all_posts()
