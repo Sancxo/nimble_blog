@@ -7,6 +7,11 @@
 # General application configuration
 import Config
 
+config :nimble_blog,
+  website_name: "Simon Tirant's Blog",
+  website_url: "https://simontirant.dev",
+  blog_url: "https://blog.simontirant.dev"
+
 # Configures the endpoint
 config :nimble_blog, NimbleBlogWeb.Endpoint,
   url: [host: "localhost"],

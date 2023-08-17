@@ -48,8 +48,6 @@ if config_env() == :prod do
     ],
     secret_key_base: secret_key_base
 
-  config :nimble_blog, website_url: "https://simontirant.dev/"
-
   # ## SSL Support
   #
   # To get SSL working, you will need to add the `https` key
