@@ -3,13 +3,16 @@ defmodule NimbleBlogWeb.BlogController do
 
   alias NimbleBlog.Blog
 
-  def index(conn, _params), do: render(conn, "index.html", posts: Blog.all_posts(), filter: false)
+  def index(conn, _params),
+    do: render(conn, "index.html", posts: Blog.all_posts(), tag_filter: "all", lang_filter: "all")
 
   def show(conn, %{"id" => id}), do: render(conn, "show.html", post: Blog.get_post_by_id!(id))
 
-  def tag_filter(conn, %{"tag" => tag}),
-    do: render(conn, "index.html", posts: Blog.get_posts_by_tag!(tag), filter: tag)
-
-  def lang_filter(conn, %{"lang" => lang}),
-    do: render(conn, "index.html", posts: Blog.get_posts_by_lang!(lang), filter: lang)
+  def filter(conn, %{"lang" => lang, "tag" => tag} = filter_map) do
+    render(conn, "index.html",
+      posts: Blog.get_posts_by_filters!(filter_map),
+      tag_filter: tag,
+      lang_filter: lang
+    )
+  end
 end

@@ -33,24 +33,47 @@ defmodule NimbleBlog.Blog do
   # def recent_posts, do: Enum.take(all_posts(), 3)
 
   defmodule NotFoundError, do: defexception([:message, plug_status: 404])
-  defmodule NoTagError, do: defexception([:message, plug_status: 261])
-  defmodule NoTranslationError, do: defexception([:message, plug_status: 262])
+  defmodule NoBlogPostsError, do: defexception([:message, plug_status: 261])
 
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||
       raise NotFoundError, "post with id=#{id} not found"
   end
 
-  def get_posts_by_tag!(tag) do
-    case Enum.filter(all_posts(), &(tag in &1.tags)) do
-      [] -> raise NoTagError, "posts with tag=#{tag} not found"
+  @doc """
+  Gets the list of posts filtered by a specific tag or language or a combination of both.
+
+  Example:
+      iex> get_posts_by_filters!(%{tag: "elixir", lang: "english"})
+      [%Post{lang: "english", tags: ["elixir", ...]}, ...]
+  """
+  @spec get_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) :: [%Post{}]
+  def get_posts_by_filters!(%{"tag" => "all", "lang" => "all"}), do: all_posts()
+
+  def get_posts_by_filters!(%{"tag" => "all", "lang" => lang}), do: lang |> get_posts_by_lang!()
+
+  def get_posts_by_filters!(%{"tag" => tag, "lang" => "all"}), do: tag |> get_posts_by_tag!()
+
+  def get_posts_by_filters!(%{"tag" => tag, "lang" => lang}) do
+    all_posts()
+    |> Enum.filter(&(lang == &1.lang))
+    |> Enum.filter(&(tag in &1.tags))
+    |> case do
+      [] -> raise NoBlogPostsError, "posts no found with tag #{tag} in #{lang} language."
       posts -> posts
     end
   end
 
-  def get_posts_by_lang!(lang) do
+  defp get_posts_by_tag!(tag) do
+    case Enum.filter(all_posts(), &(tag in &1.tags)) do
+      [] -> raise NoBlogPostsError, "posts with tag=#{tag} not found"
+      posts -> posts
+    end
+  end
+
+  defp get_posts_by_lang!(lang) do
     case Enum.filter(all_posts(), &(lang == &1.lang)) do
-      [] -> raise NoTranslationError, "posts for #{lang} language not found"
+      [] -> raise NoBlogPostsError, "posts for #{lang} language not found"
       posts -> posts
     end
   end

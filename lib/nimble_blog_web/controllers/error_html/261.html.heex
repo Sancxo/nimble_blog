@@ -29,9 +29,9 @@
 
     <main class="px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl">
-        <h2 class="">All `<%= @conn.params["tag"] %>` blog posts: </h2>
+        <h2 class="">All <%= @conn.params["tag"] != "all" && "`#{@conn.params["tag"]}`" || nil %> blog posts <%= @conn.params["lang"] != "all" && "in #{@conn.params["lang"]}" || nil %>: </h2>
 
-        <p>Oops! No posts found with tag `<%= @conn.params["tag"] %>` ...</p>
+        <p>Oops! No posts found with tag `<%= @conn.params["tag"] %>` in <%= @conn.params["lang"] %> language ...</p>
         <.link patch="/" class="text-future-blue text-center">&lt; Go back to root</.link>
       </div>
     </main>

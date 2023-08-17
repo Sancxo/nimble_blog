@@ -14,8 +14,8 @@
   </div>
 
   <div class="text-center mt-4">
-    <.link patch="/lang/french">🇫🇷</.link>
-    <.link patch="/lang/english">🇬🇧</.link>
+    <.link patch={"/lang/french/tag/#{@conn.assigns.tag_filter}"}>🇫🇷</.link>
+    <.link patch={"/lang/english/tag/#{@conn.assigns.tag_filter}"}>🇬🇧</.link>
   </div>
 </header>
 
