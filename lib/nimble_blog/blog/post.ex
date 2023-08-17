@@ -7,7 +7,8 @@ defmodule NimbleBlog.Blog.Post do
     :illustration,
     :description,
     :tags,
-    :date
+    :date,
+    :lang
   ]
   defstruct [
     :id,
@@ -18,7 +19,8 @@ defmodule NimbleBlog.Blog.Post do
     :illustration_alt,
     :description,
     :tags,
-    :date
+    :date,
+    :lang
   ]
 
   def build(filename, attrs, body) do

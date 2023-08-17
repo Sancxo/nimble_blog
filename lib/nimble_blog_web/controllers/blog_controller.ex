@@ -9,4 +9,7 @@ defmodule NimbleBlogWeb.BlogController do
 
   def tag_filter(conn, %{"tag" => tag}),
     do: render(conn, "index.html", posts: Blog.get_posts_by_tag!(tag), filter: tag)
+
+  def lang_filter(conn, %{"lang" => lang}),
+    do: render(conn, "index.html", posts: Blog.get_posts_by_lang!(lang), filter: lang)
 end

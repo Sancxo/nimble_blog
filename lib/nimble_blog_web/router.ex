@@ -21,6 +21,7 @@ defmodule NimbleBlogWeb.Router do
     get "/post/:id", BlogController, :show
 
     get "/tag/:tag", BlogController, :tag_filter
+    get "/lang/:lang", BlogController, :lang_filter
   end
 
   # Other scopes may use custom stacks.

@@ -1,3 +1,4 @@
+<%= if @filter do %><.link patch="/">← All blog posts</.link><% end %>
 <h2 class="">All <%= @filter && "`#{@filter}`" || nil %> blog posts: </h2>
 
 <%= for post <- @posts do %>

@@ -42,7 +42,8 @@ config :esbuild,
   ]
 
 config :plug, :statuses, %{
-  261 => "No content for this tag"
+  261 => "No content for this tag",
+  262 => "No content for this language"
 }
 
 # Configure tailwind (the version is required)

@@ -34,6 +34,7 @@ defmodule NimbleBlog.Blog do
 
   defmodule NotFoundError, do: defexception([:message, plug_status: 404])
   defmodule NoTagError, do: defexception([:message, plug_status: 261])
+  defmodule NoTranslationError, do: defexception([:message, plug_status: 262])
 
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||
@@ -43,6 +44,13 @@ defmodule NimbleBlog.Blog do
   def get_posts_by_tag!(tag) do
     case Enum.filter(all_posts(), &(tag in &1.tags)) do
       [] -> raise NoTagError, "posts with tag=#{tag} not found"
+      posts -> posts
+    end
+  end
+
+  def get_posts_by_lang!(lang) do
+    case Enum.filter(all_posts(), &(lang == &1.lang)) do
+      [] -> raise NoTranslationError, "posts for #{lang} language not found"
       posts -> posts
     end
   end
