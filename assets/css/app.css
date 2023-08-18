@@ -3,6 +3,7 @@
 @import "tailwindcss/utilities";
 
 @import "./keyframes.css";
+@import "./makeup_elixir.css";
 
 /* This file is for your main application CSS */
 
@@ -22,6 +23,7 @@
   --neonGreen: #39ff14;
   --ultraViolet: #6B5B95;
   --galaxyBlue: #2A4B7C;
+  --regular: "Fira Sans", sans-serif;
   --code: "Fira Code", monospace;
   --pixel: "Bungee Shade", cursive;
   --pixel-hair: "Bungee Hairline", cursive;
@@ -80,6 +82,10 @@ a:hover {
   text-shadow: 0 0 1em var(--neonGreen);
 
   content: "← Return to website";
+}
+
+code.inline {
+  font-family: var(--code);
 }
 
 #go-up-arrow {

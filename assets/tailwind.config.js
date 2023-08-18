@@ -14,7 +14,9 @@ module.exports = {
   theme: {
     fontFamily: {
       'pixel': ['"Bungee Shade"', 'cursive'],
-      'pixel-hair': ['"Bungee Hairline", cursive']
+      'pixel-hair': ['"Bungee Hairline", cursive'],
+      'fira': ['"Fira Sans", sans-serif'],
+      'fira-code': ['"Fira Code", monospace']
     },
     colors: {
       'black': "#161616",
@@ -41,7 +43,10 @@ module.exports = {
         'h2': { fontSize: '1.5em', margin: '0.83rem 0', fontWeight: 'bold' },
         'h3': { fontSize: '1.17em', margin: `1em 0`, fontWeight: 'bold' },
         'p': { margin: '1em 0' },
-        'pre': { margin: '1em 0' },
+        'pre': {
+          margin: '1em 0 2rem', padding: "1rem 2.5rem 1rem 1rem", fontSize: '.833rem', background: '#272822', color: theme("colors.black")
+        },
+        'code': { padding: '.125rem .25rem', fontSize: '.833rem', background: '#272822', color: '#f8f8f2' },
         'img': { margin: 'auto' },
         'blockquote': { margin: '1em 40px' },
         'dl': { margin: '1em 0' },
