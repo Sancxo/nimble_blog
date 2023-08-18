@@ -9,8 +9,6 @@
 }
 ---
 
-*(Ceci est la republication d'un article de blog posté sur [Linkedin](https://www.linkedin.com/pulse/elixir-la-potion-magique-du-d%C3%A9veloppement-web-simon-tirant/) le 28/09/2021).*
-
 👋 Adieu PHP, Ruby, Python, Java et JavaScript … Elixir est arrivé !  
 
 ![Logo du langage Elixir](/images/posts/elixir.png)
