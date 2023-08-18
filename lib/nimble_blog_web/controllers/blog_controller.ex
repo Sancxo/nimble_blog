@@ -6,7 +6,13 @@ defmodule NimbleBlogWeb.BlogController do
   def index(conn, _params),
     do: render(conn, "index.html", posts: Blog.all_posts(), tag_filter: "all", lang_filter: "all")
 
-  def show(conn, %{"id" => id}), do: render(conn, "show.html", post: Blog.get_post_by_id!(id))
+  def show(conn, %{"id" => id}),
+    do:
+      render(conn, "show.html",
+        post: Blog.get_post_by_id!(id),
+        tag_filter: "all",
+        lang_filter: "all"
+      )
 
   def filter(conn, %{"lang" => lang, "tag" => tag} = filter_map) do
     render(conn, "index.html",
