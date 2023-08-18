@@ -9,6 +9,8 @@
 }
 ---
 
+*(Ceci est la republication d'un article de blog posté sur Linkedin le 28/09/2021).*
+
 👋 Adieu PHP, Ruby, Python, Java et JavaScript … Elixir est arrivé !  
 
 ![Logo du langage Elixir](/images/posts/elixir.png)
