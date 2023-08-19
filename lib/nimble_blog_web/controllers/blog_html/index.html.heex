@@ -2,24 +2,25 @@
 <h2 class="">All <%= @tag_filter != "all" && "`#{@tag_filter}`" || nil %> blog posts <%= @lang_filter != "all" && "in #{@lang_filter}" || nil %>: </h2>
 
 <%= for post <- @posts do %>
-  <div id={post.id} class="post-item" style="margin-bottom: 3rem;">
-    <p><%= post.author %>, <%= post.date |> Blog.get_time_from_now() %>:</p>
+  <div id={post.id} class="post-item rounded border-2 p-4" style="margin-bottom: 3rem;">
+    <.link patch={"/post/#{post.id}"}>
+      <h3>
+          <img src={post.illustration}  alt={post.illustration_alt} class="w-full mx-auto my-8" />
+          <span class="font-pixel-hair text-xl font-bold">|></span> <%= post.title %>
+      </h3>
 
-    <%= raw(post.description) %>
+      <div class="text-white">
+        <p><%= post.author %>, <%= post.date |> Blog.get_time_from_now() %> - <%= post.body |> Blog.get_reading_duration() %> min read:</p>
 
-    <h3>
-      <.link patch={"/post/#{post.id}"}>
-        <img src={post.illustration}  alt={post.illustration_alt} class="w-full mx-auto my-8" />
-        <span class="font-pixel-hair text-xl font-bold">|></span> <%= post.title %>
-      </.link>
-    </h3>
+        <p><%= raw(post.description) %></p>
+      </div>
+    </.link>
 
     <p id="post-tags">
       Tagged as
       <%= for tag <- post.tags do %>
         <.link patch={"/lang/#{@lang_filter}/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
       <% end %>
-      - <%= post.body |> Blog.get_reading_duration() %> min read
     </p>
   </div>
 <% end %>
