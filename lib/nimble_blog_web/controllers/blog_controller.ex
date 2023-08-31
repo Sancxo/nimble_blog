@@ -28,7 +28,7 @@ defmodule NimbleBlogWeb.BlogController do
 
   def filter(conn, %{"lang" => lang, "tag" => tag} = filter_map) do
     render(conn, "index.html",
-      posts: Blog.get_posts_by_filters!(filter_map),
+      posts: Blog.list_posts_by_filters!(filter_map),
       tag_filter: tag,
       lang_filter: lang
     )

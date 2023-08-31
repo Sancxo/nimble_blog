@@ -50,17 +50,17 @@ defmodule NimbleBlog.Blog do
   Gets the list of posts filtered by a specific tag or language or a combination of both.
 
   Example:
-      iex> get_posts_by_filters!(%{tag: "elixir", lang: "en"})
+      iex> list_posts_by_filters!(%{tag: "elixir", lang: "en"})
       [%Post{lang: "en", tags: ["elixir", ...]}, ...]
   """
-  @spec get_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) :: [%Post{}]
-  def get_posts_by_filters!(%{"tag" => "all", "lang" => "all"}), do: all_posts()
+  @spec list_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) :: [%Post{}]
+  def list_posts_by_filters!(%{"tag" => "all", "lang" => "all"}), do: all_posts()
 
-  def get_posts_by_filters!(%{"tag" => "all", "lang" => lang}), do: lang |> get_posts_by_lang!()
+  def list_posts_by_filters!(%{"tag" => "all", "lang" => lang}), do: lang |> list_posts_by_lang!()
 
-  def get_posts_by_filters!(%{"tag" => tag, "lang" => "all"}), do: tag |> get_posts_by_tag!()
+  def list_posts_by_filters!(%{"tag" => tag, "lang" => "all"}), do: tag |> list_posts_by_tag!()
 
-  def get_posts_by_filters!(%{"tag" => tag, "lang" => lang}) do
+  def list_posts_by_filters!(%{"tag" => tag, "lang" => lang}) do
     all_posts()
     |> Enum.filter(&(lang == &1.lang))
     |> Enum.filter(&(tag in &1.tags))
@@ -70,14 +70,14 @@ defmodule NimbleBlog.Blog do
     end
   end
 
-  defp get_posts_by_tag!(tag) do
+  defp list_posts_by_tag!(tag) do
     case Enum.filter(all_posts(), &(tag in &1.tags)) do
       [] -> raise NoBlogPostsError, "posts with tag=#{tag} not found"
       posts -> posts
     end
   end
 
-  defp get_posts_by_lang!(lang) do
+  defp list_posts_by_lang!(lang) do
     case Enum.filter(all_posts(), &(lang == &1.lang)) do
       [] -> raise NoBlogPostsError, "posts for #{lang} language not found"
       posts -> posts
