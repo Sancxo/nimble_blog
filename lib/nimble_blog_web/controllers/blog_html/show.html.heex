@@ -7,7 +7,7 @@
   <meta property="og:title" content={@post.title} />
   <meta property="og:description" content={@post.description} />
   <meta property="og:image" content={Application.get_env(:nimble_blog, :blog_url) <> @post.illustration} />
-  <meta property="og:url" content={Application.get_env(:nimble_blog, :website_url) <> @post.id} />
+  <meta property="og:url" content={Application.get_env(:nimble_blog, :website_url) <> @post.id <> "/" <> @post.lang} />
   <meta property="og:site_name" content={Application.get_env(:nimble_blog, :website_name)} />
   <%= if @post.lang == "fr" do %>
     <meta property="og:locale" content="fr_FR" />

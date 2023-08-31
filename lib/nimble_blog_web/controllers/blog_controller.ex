@@ -18,10 +18,10 @@ defmodule NimbleBlogWeb.BlogController do
     render(conn, "index.html", posts: posts, tag_filter: "all", lang_filter: "all")
   end
 
-  def show(conn, %{"id" => id}),
+  def show(conn, %{"id" => id, "lang" => lang}),
     do:
       render(conn, "show.html",
-        post: Blog.get_post_by_id!(id),
+        post: Blog.get_post_by_id_and_lang!(id, lang),
         tag_filter: "all",
         lang_filter: "all"
       )

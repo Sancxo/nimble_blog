@@ -35,9 +35,15 @@ defmodule NimbleBlog.Blog do
   defmodule NotFoundError, do: defexception([:message, plug_status: 404])
   defmodule NoBlogPostsError, do: defexception([:message, plug_status: 261])
 
+  @deprecated "Use get_post_by_id_and_lang/2 instead to distinguish english and french version of the same article when they share the same id."
   def get_post_by_id!(id) do
     Enum.find(all_posts(), &(&1.id == id)) ||
       raise NotFoundError, "post with id=#{id} not found"
+  end
+
+  def get_post_by_id_and_lang!(id, lang) do
+    Enum.find(all_posts(), &(&1.id == id && &1.lang == lang)) ||
+      raise NotFoundError, "post with both id=#{id} and lang=#{lang} not found"
   end
 
   @doc """
