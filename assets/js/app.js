@@ -40,7 +40,7 @@ liveSocket.connect()
 window.liveSocket = liveSocket
 
 // Script to make Earmark's Markdown links to target _blank with noreferrer :
-blogPostLinks = document.querySelectorAll("article.post div.post-body a");
+const blogPostLinks = document.querySelectorAll("article.post div.post-body a");
 for (let link = 0; link < blogPostLinks.length; link++) {
   blogPostLinks[link].setAttribute("rel", "noreferrer");
   blogPostLinks[link].setAttribute("target", "_blank");
