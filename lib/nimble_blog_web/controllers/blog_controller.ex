@@ -4,16 +4,13 @@ defmodule NimbleBlogWeb.BlogController do
   alias NimbleBlog.Blog
 
   def index(conn, _params) do
-    posts =
-      Blog.all_posts()
-      |> Enum.reduce([], fn
-        post, [head | _tail] = acc ->
-          if head.date == post.date, do: acc, else: [post | acc]
-
-        post, acc ->
-          [post | acc]
-      end)
-      |> Enum.reverse()
+    # I chose to remove duplicated elements by id (the last part of the name file).
+    # It means that both english and french version of the article should have the same id (warning!).
+    # It also means that I have to get one article, in the show function,
+    # by the combination of its id and language instead of just the id.
+    # Another solution is to remove them by date as I will not publish 2 different articles the same day,
+    # but both versions will share the same publishing date.
+    posts = Blog.all_posts() |> Enum.dedup_by(& &1.id)
 
     render(conn, "index.html", posts: posts, tag_filter: "all", lang_filter: "all")
   end
