@@ -2,7 +2,7 @@
   title: "Nimble Blog (1/2)",
   author: "Simon Tirant",
   tags: ~w(elixir phoenix web blog nimblepublisher),
-  lang: "en",
+  lang: "english",
   description: "Yes, blogs are has-been ; so it's time to make a new one ! Here, before we get our hands dirty, we gonna see the purpose of NimblePublisher: a light Elixir library to make a quick and fast dynamic blog with Phoenix.",
   illustration: "/images/posts/printing.webp",
   illustration_alt: "Industrial newspaper printing in action"

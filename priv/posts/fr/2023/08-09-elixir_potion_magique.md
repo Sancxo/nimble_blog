@@ -2,7 +2,7 @@
   title: "Elixir: la potion magique du développement web?",
   author: "Simon Tirant",
   tags: ~w(elixir phoenix web ruby rails erlang beam),
-  lang: "fr",
+  lang: "french",
   description: "Pourquoi Elixir est-il un bon choix de langage de programmation pour le développement web?",
   illustration: "/images/posts/pouf.gif",
   illustration_alt: "Magicien disparaissant dans un nuage de fumée"

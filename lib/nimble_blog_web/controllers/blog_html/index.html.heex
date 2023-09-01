@@ -1,5 +1,5 @@
 <%= if @tag_filter != "all" || @lang_filter != "all" do %><.link patch="/">← All blog posts</.link><% end %>
-<h2 class="">All <%= @tag_filter != "all" && "`#{@tag_filter}`" || nil %> blog posts <%= @lang_filter != "all" && "in #{@lang_filter == "en" && "english" || "french"}" || nil %>: </h2>
+<h2 class="">All <%= @tag_filter != "all" && "`#{@tag_filter}`" || nil %> blog posts <%= @lang_filter != "all" && "in #{@lang_filter}" || nil %>: </h2>
 
 <%= for post <- @posts do %>
   <div id={post.id <> "-" <> post.lang} class="post-item rounded border-2 p-4" style="margin-bottom: 3rem;">
@@ -23,7 +23,7 @@
     <%= case Blog.check_for_translation(post.id, post.lang) do %>
       <% nil -> %> <%= nil %>
       <% translated_post = %Blog.Post{} -> %>
-        <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"}>Also available in <%= translated_post.lang == "en" && "english" || "french" %></.link></p>
+        <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"}>Also available in <%= translated_post.lang %></.link></p>
     <% end  %>
   </div>
 <% end %>

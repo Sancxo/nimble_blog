@@ -9,7 +9,7 @@
   <meta property="og:image" content={Application.get_env(:nimble_blog, :blog_url) <> @post.illustration} />
   <meta property="og:url" content={Application.get_env(:nimble_blog, :website_url) <> @post.id <> "/" <> @post.lang} />
   <meta property="og:site_name" content={Application.get_env(:nimble_blog, :website_name)} />
-  <%= if @post.lang == "fr" do %>
+  <%= if @post.lang == "french" do %>
     <meta property="og:locale" content="fr_FR" />
   <% else %>
     <meta property="og:locale" content="en_US" />
@@ -46,7 +46,7 @@
   <%= case Blog.check_for_translation(@post.id, @post.lang) do %>
     <% nil -> %> <%= nil %>
     <% translated_post = %Blog.Post{} -> %>
-      <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"} class="text-future-blue">This post also exists in <%= translated_post.lang == "en" && "english" || "french" %></.link></p>
+      <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"} class="text-future-blue">This post also exists in <%= translated_post.lang %></.link></p>
   <% end  %>
 
   <div class="post-body">

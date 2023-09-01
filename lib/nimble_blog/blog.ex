@@ -46,11 +46,11 @@ defmodule NimbleBlog.Blog do
   Raise if nothing is found.
 
   #### Example:
-      iex> get_post_by_id_and_lang!("post_1", "en")
+      iex> get_post_by_id_and_lang!("post_1", "english")
       %Post{}
 
-      iex> get_post_by_id_and_lang!("post_1", "de")
-      ** (NotFoundError) post with both id="post_1" and lang="de" not found
+      iex> get_post_by_id_and_lang!("post_1", "german")
+      ** (NotFoundError) post with both id="post_1" and lang="german" not found
   """
   @spec get_post_by_id_and_lang!(String.t(), String.t()) :: %Post{} | NotFoundError
   def get_post_by_id_and_lang!(id, lang) do
@@ -67,15 +67,15 @@ defmodule NimbleBlog.Blog do
   Returns the other language version of the blog post if exists, if not returns `nil`.
 
   #### Example:
-      iex> check_for_translation("post_1", "fr")
-      %Post{id: "post_1", lang: "en", ...}
+      iex> check_for_translation("post_1", "french")
+      %Post{id: "post_1", lang: "english", ...}
 
-      iex> check_for_translation("post_2", "fr")
+      iex> check_for_translation("post_2", "french")
       nil
   """
   @spec check_for_translation(String.t(), String.t()) :: %Post{} | nil
   def check_for_translation(id, lang) do
-    alt_lang = (lang == "en" && "fr") || "en"
+    alt_lang = (lang == "english" && "french") || "english"
 
     get_post_by_id_and_lang(id, alt_lang)
   end
@@ -84,8 +84,8 @@ defmodule NimbleBlog.Blog do
   Gets the list of posts filtered by a specific tag or language or a combination of both.
 
   Example:
-      iex> list_posts_by_filters!(%{tag: "elixir", lang: "en"})
-      [%Post{lang: "en", tags: ["elixir", ...]}, ...]
+      iex> list_posts_by_filters!(%{tag: "elixir", lang: "english"})
+      [%Post{lang: "english", tags: ["elixir", ...]}, ...]
   """
   @spec list_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) :: [%Post{}]
   def list_posts_by_filters!(%{"tag" => "all", "lang" => "all"}), do: all_posts()
