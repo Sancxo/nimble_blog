@@ -20,5 +20,10 @@
         <.link patch={"/lang/#{@lang_filter}/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
       <% end %>
     </p>
+    <%= case Blog.check_for_translation(post.id, post.lang) do %>
+      <% nil -> %> <%= nil %>
+      <% translated_post = %Blog.Post{} -> %>
+        <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"}>Also available in <%= translated_post.lang == "en" && "english" || "french" %></.link></p>
+    <% end  %>
   </div>
 <% end %>

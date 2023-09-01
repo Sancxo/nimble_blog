@@ -43,6 +43,12 @@
     <% end %>
   </p>
 
+  <%= case Blog.check_for_translation(@post.id, @post.lang) do %>
+    <% nil -> %> <%= nil %>
+    <% translated_post = %Blog.Post{} -> %>
+      <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"} class="text-future-blue">This post also exists in <%= translated_post.lang == "en" && "english" || "french" %></.link></p>
+  <% end  %>
+
   <div class="post-body">
     <%= raw @post.body %>
   </div>
