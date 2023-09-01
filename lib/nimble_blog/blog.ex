@@ -41,6 +41,7 @@ defmodule NimbleBlog.Blog do
       raise NotFoundError, "post with id=#{id} not found"
   end
 
+  @spec get_post_by_id_and_lang!(String.t(), String.t()) :: %Post{} | NotFoundError
   def get_post_by_id_and_lang!(id, lang) do
     Enum.find(all_posts(), &(&1.id == id && &1.lang == lang)) ||
       raise NotFoundError, "post with both id=#{id} and lang=#{lang} not found"
