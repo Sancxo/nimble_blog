@@ -41,10 +41,43 @@ defmodule NimbleBlog.Blog do
       raise NotFoundError, "post with id=#{id} not found"
   end
 
+  @doc """
+  Returns a specific %Post{} from the combination of its id and language.
+  Raise if nothing is found.
+
+  #### Example:
+      iex> get_post_by_id_and_lang!("post_1", "en")
+      %Post{}
+
+      iex> get_post_by_id_and_lang!("post_1", "de")
+      ** (NotFoundError) post with both id="post_1" and lang="de" not found
+  """
   @spec get_post_by_id_and_lang!(String.t(), String.t()) :: %Post{} | NotFoundError
   def get_post_by_id_and_lang!(id, lang) do
     Enum.find(all_posts(), &(&1.id == id && &1.lang == lang)) ||
       raise NotFoundError, "post with both id=#{id} and lang=#{lang} not found"
+  end
+
+  @spec get_post_by_id_and_lang(String.t(), Sting.t()) :: %Post{} | nil
+  defp get_post_by_id_and_lang(id, lang) do
+    all_posts() |> Enum.find(&(&1.id == id && &1.lang == lang)) || nil
+  end
+
+  @doc """
+  Returns the other language version of the blog post if exists, if not returns `nil`.
+
+  #### Example:
+      iex> check_for_translation("post_1", "fr")
+      %Post{id: "post_1", lang: "en", ...}
+
+      iex> check_for_translation("post_2", "fr")
+      nil
+  """
+  @spec check_for_translation(String.t(), String.t()) :: %Post{} | nil
+  def check_for_translation(id, lang) do
+    alt_lang = (lang == "en" && "fr") || "en"
+
+    get_post_by_id_and_lang(id, alt_lang)
   end
 
   @doc """
