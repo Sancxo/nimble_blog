@@ -3,7 +3,7 @@
   author: "Simon Tirant",
   tags: ~w(elixir phoenix web blog nimblepublisher),
   lang: "french",
-  description: "Oui, les blogs sont has-been ; alors c'est le moment d'en créer un ! Ici, avant de nous salir les mains, nous allons voir quel est l'intérêt de NimblePublisher: une librairie Elixir très légère pour créer un blog rapide et dynamique avec Phoenix.",
+  description: "Oui, les blogs sont has-been ; alors c'est le moment d'en créer un! Ici, avant de nous salir les mains, nous allons voir quel est l'intérêt de NimblePublisher: une librairie Elixir très légère pour créer un blog rapide et dynamique avec Phoenix.",
   illustration: "/images/posts/printing.webp",
   illustration_alt: "Impression industrielle de journaux en activité"
 }
