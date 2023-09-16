@@ -41,9 +41,7 @@ config :esbuild,
     env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
   ]
 
-config :plug, :statuses, %{
-  261 => "No blog posts for these filters"
-}
+config :plug, :statuses, %{261 => "No Blog Posts Found"}
 
 # Configure tailwind (the version is required)
 config :tailwind,
