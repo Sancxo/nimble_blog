@@ -17,7 +17,7 @@ You also have static site generators, as the well-known [Jekyll](https://jekyllr
 
 So the 1 billion dollar question (actually it's free because it's *open source*) is: '***How lord can I get the best of two worlds ? How can I have a sligthly dynamic blog compiled from simple Markdown files located on a dedicated Git repository??? Please tell me! TELL ME!***'
 
-Keep calm John-John, **José has your back!** Indeed, first of all, the previously mentioned article continues to describe the way they did a dynamic blog, using [Phoenix](https://www.phoenixframework.org/) to pre-compile and load into memory their Markdown posts located inside a framework folder (meaning in disk **and not in database**!).
+Keep calm John-John, **José has your back!** Indeed, first of all, the previously mentioned article continues to describe the way they did a dynamic blog, using [Phoenix](https://www.phoenixframework.org/) to pre-compile and load into memory their [Markdown](https://daringfireball.net/projects/markdown/) posts located inside a framework folder (meaning in disk **and not in database**!).
 
 > In a nutshell, when our project compiles, we read all blog posts from disk and convert them into in-memory data structures.
 >
@@ -47,6 +47,6 @@ Well, here it is, just in front of your beautiful eyes, the 17 lines of code whi
   end
 ```
 
-Then, more than a simple tutorial article, José decided to turn these lines of code into a Hex library named **[NimblePublisher](https://hex.pm/packages/nimble_publisher)**. Now you can do the same as Dashbit without taking care of parsing the Markdown files into structs (except if you want to customize the parsing) or converting the Markdown syntax into plain old HTML at compile-time (which is actually done by [Earmark](https://hex.pm/packages/earmark) and [MakeupElixir](https://hex.pm/packages/makeup_elixir) dependencies).
+Then, more than a simple tutorial article, José decided to turn these lines of code into a Hex library named **[NimblePublisher](https://hex.pm/packages/nimble_publisher)**. Now you can do the same as [Dashbit](https://dashbit.co/) without taking care of parsing the [Markdown](https://daringfireball.net/projects/markdown/) files into structs (except if you want to customize the parsing) or converting the [Markdown](https://daringfireball.net/projects/markdown/) syntax into plain old HTML at compile-time (which is actually done by [Earmark](https://hex.pm/packages/earmark) and [MakeupElixir](https://hex.pm/packages/makeup_elixir) dependencies).
 
-And that's exactly what we'll see in the next article: a tutorial about NimblePublisher powered by Phoenix 1.7, the latest version of the framework which brings changes to the views mechanism!
+And that's exactly what we'll see in the next article: a tutorial about NimblePublisher powered by [Phoenix](https://www.phoenixframework.org/) 1.7, the latest version of the framework which brings changes to the views mechanism!
