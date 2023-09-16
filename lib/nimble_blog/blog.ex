@@ -86,12 +86,14 @@ defmodule NimbleBlog.Blog do
   Example:
       iex> list_posts_by_filters!(%{tag: "elixir", lang: "english"})
       [%Post{lang: "english", tags: ["elixir", ...]}, ...]
+
+      iex> list_posts_by_filters!(%{tag: "cooking", lang: "sumerian"})
+      ** (NoBlogPostsError) posts no found with tag cooking in sumerian language.
   """
-  @spec list_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) :: [%Post{}]
+  @spec list_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) ::
+          [%Post{}] | NoBlogPostsError
   def list_posts_by_filters!(%{"tag" => "all", "lang" => "all"}), do: all_posts()
-
   def list_posts_by_filters!(%{"tag" => "all", "lang" => lang}), do: lang |> list_posts_by_lang!()
-
   def list_posts_by_filters!(%{"tag" => tag, "lang" => "all"}), do: tag |> list_posts_by_tag!()
 
   def list_posts_by_filters!(%{"tag" => tag, "lang" => lang}) do
