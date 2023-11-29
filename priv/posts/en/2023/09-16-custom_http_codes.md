@@ -8,9 +8,9 @@
   illustration_alt: "Animated error message"
 }
 ---
-By default - inside your [Phoenix](https://www.phoenixframework.org/) app - every exception raised is a `500` error; the notorious `Internal Server Error` meaning that the website developer is a naughty programer who made some mistakes and forgot to reread his own code. But hey! Sometimes it's also the visitor fault! So please don't bite the hand who's feeding you with such nice content!
+By default - inside your [Phoenix](https://www.phoenixframework.org/) app - every exception raised is a `500` error; the notorious `Internal Server Error`, meaning that the website developer is a naughty programer who made some mistakes and forgot to reread his own code. But hey! Sometimes it's also the visitor fault! So please don't bite the hand who's feeding you with such nice content!
 
-Well, in my case I wanted to raise two other kinds of exceptions: the first one was the famous `404 Not Found` but I also decided to create a custom `261 No Blog Posts Found`. Here is my story...
+Well, in my case I wanted to raise two other kinds of exceptions: the first one was the famous `404 Not Found` but I also decided to create a custom and more specific `461 No Blog Posts Found`. Here is my story...
 
 ![Old book opening](/images/posts/old_book.webp)
 
@@ -18,7 +18,7 @@ Well, in my case I wanted to raise two other kinds of exceptions: the first one 
 
 For the first one, I wanted to raise an exception when a specific article is not found for a specific language. For example, I manage translation on this blog with the uri path; look at the address bar: the post you are currently reading has a domain name / then the `post` route / then the article id (`custom_http_codes`) / finally the language attribute which can be either `english` or `french`. If you decide - for some reasons - to change this last path attribute to write `silbo` instead (for the record, the *silbo* is an antique whistled language used in Gomera, one of the Canary islands), then the server will raise that `404 Not Found` exception - instead of the default `500` - because, even if I could still learn this language online and record my tech article into an audio file so you could listen to it through a web audio player, I'm not really sure that there would be an audience for that.
 
-Concretly, my `show/2` function from my `BlogController` calls a `get_post_by_id_and_lang!/2` function by passing the article id and language path attributes to it as parameters. The `get_post_by_id_and_lang!/2` is then responsible to retrieve the article by its id and language (because two articles can share the same id if they are in different languages), if `nil` it raises an exception called `NotFoundError` which was declared in its own module. Here is an extract of my code below:
+Concretly, my `show/2` function from my `BlogController` calls another function from the `Blog` module, nammed `get_post_by_id_and_lang!/2`, by passing the article id and language path attributes to it as parameters. The `Blog.get_post_by_id_and_lang!/2` is then responsible to retrieve the article by its id and language (because two articles can share the same id if they are in different languages), if `nil` it raises an exception called `NotFoundError` which was previously declared in its own module. Here is an extract of my code below:
 
 ```elixir
 defmodule NimbleBlog.Blog do
@@ -50,7 +50,7 @@ end
 
 *P.S.: this blog uses the [NimblePublisher](https://hex.pm/packages/nimble_publisher) library to render blog posts from [Markdown](https://daringfireball.net/projects/markdown/) files stored inside a folder. As I don't use a database, there is no [Ecto](https://hexdocs.pm/ecto/Ecto.html) functions such as `Repo.get!/3` but functions from the `Enum` module instead.*
 
-As we can see, the exception I have declared as `NotFoundError` is related to a classic old `404` [HTTP code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) with the `plug_status: 404` option we have set just after the `:message` option. The `404` is a very common [HTTP code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) and [Plug](https://hexdocs.pm/plug/readme.html) already knows it, as we can see here at the top of the `Plug.Conn.Status`, located into the `deps` folder:
+As we can see, the exception I have declared as `NotFoundError` is related to a classic old `404` [HTTP code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), this because of the `plug_status: 404` option I have set just after the `:message` option. The `404` is a very common [HTTP code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) and [Plug](https://hexdocs.pm/plug/readme.html) already knows it, look at the top of the `Plug.Conn.Status`, located into the `deps` folder:
 
 ```elixir
   statuses = %{
@@ -128,11 +128,11 @@ But, if you actually looked at the top of the `Plug.Conn.Status` of any [Phoenix
   custom_statuses = Application.compile_env(:plug, :statuses, %{})
 ```
 
-Do you know what it means? It means that even if the standard [HTTP codes list](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) anticipated some private jokes so you can have fun with them, it lets a lot of available codes to make your own bizarre statuses.
+Do you know what it means? It means that even if the standard [HTTP codes list](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status) anticipated some private jokes - like `418 I'm a teapot` or, my favorite, `451 Unavailable For Legal Reasons` ... the censorship in _Fahrenheit 451_, do you get it ? - so you can have fun with them, it lets a lot of available codes to make your own bizarre statuses.
 
 ### Ready to play with numbers ? 🧮
 
-Well, I also needed to raise an error when the results of a tag filter is empty for a specific language. So, if you click - for example - on the `knitting 🧶` tag then on the `english 🇬🇧` flag to only have blog posts about knitting in english, well you'll raise my custom `261 No Blog Posts Found` [HTTP code]((https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)). And because this is a tech blog, the exception would have been raised for `french 🇫🇷` language too! That code, like the `404`, will then call the `261.html.heex` view from the `error_html` folder explaining you that the server haven't found any articles for your request.
+Well, I also needed to raise an error when the results of a tag filter is empty for a specific language. So, if you click - for example - on the `knitting 🧶` tag then on the `english 🇬🇧` flag to only have blog posts about knitting in english, well you'll raise my custom `461 No Blog Posts Found` [HTTP code]((https://developer.mozilla.org/en-US/docs/Web/HTTP/Status)). And because this is a tech blog, the exception would have been raised for `french 🇫🇷` language too! That code, like the `404`, will then call the `461.html.heex` view from the `error_html` folder explaining you that the server haven't found any articles for your request.
 
 But ... How did I do that ? Is this **black magic** ? *Boooo...*🕷️🔮🪄🧿
 
@@ -141,10 +141,10 @@ Well, actually no. This is just done by using the `Config.config/3` function for
 ```elixir
 import Config
 
-config :plug, :statuses, %{261 => "No Blog Posts Found"}
+config :plug, :statuses, %{461 => "No Blog Posts Found"}
 ```
 
-This way, at compile time, [Plug](https://hexdocs.pm/plug/readme.html) will build its `statuses` map we saw earlier, for the `404` [HTTP code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), **but including this time** the statuses we passed to the `config.exs` file (as you may have understood, it is necessary to recompile [Plug](https://hexdocs.pm/plug/readme.html) after this modification). This way, I can do the following to my `Blog` module in order to filter the blog articles:
+This way, at compile time, [Plug](https://hexdocs.pm/plug/readme.html) will build its `statuses` map we saw earlier with the `404` [HTTP code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), **but including this time** the statuses we passed to the `config.exs` file (as you may have understood, it is necessary to recompile [Plug](https://hexdocs.pm/plug/readme.html) after this modification). This way, I can do the following to my `Blog` module in order to filter the blog articles:
 
 ```elixir 
 defmodule NimbleBlog.Blog do
@@ -152,7 +152,7 @@ defmodule NimbleBlog.Blog do
 
   def all_posts, do: @posts
 
-  defmodule NoBlogPostsError, do: defexception([:message, plug_status: 261])
+  defmodule NoBlogPostsError, do: defexception([:message, plug_status: 461])
 
   @doc """
   Gets the list of posts filtered by a specific tag or language or a combination of both.
@@ -196,6 +196,6 @@ defmodule NimbleBlog.Blog do
 end
 ```
 
-As for the `404` code, I declared my `NoBlogPostsError` exception into its own module and I used the `plug_status: 261` option to call the custom status we have set before in `config.exs`. The functions responsible to render the `%Post{}` list - filtered by language, tag or both - can then call the exception module in case the `%Post{}` list is empty.
+As for the `404` code, I declared my `NoBlogPostsError` exception into its own module and I used the `plug_status: 461` option to call the custom status we have set before in `config.exs`. The functions responsible to render the `%Post{}` list - filtered by language, tag or both - can then call the exception module in case the `%Post{}` list is empty.
 
-*N.B.: this method, to add custom codes which are not used by the standard [HTTP codes list](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), can also be used to create a different message for an existing code. This way, you can modify the `404 Not Found` for a cheeky `404 Found But Don't Want To Show It To You`. Nice!*
+*N.B.: this method, to add custom codes which are not used by the standard [HTTP codes list](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status), can also be used to create a different message for an existing code. This way, you can modify the `404 Not Found` for a cheeky `404 Found But Don't Want To Show It To You`; or again `451 Sorry But It Burned!`. Nice!*
