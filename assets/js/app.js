@@ -55,8 +55,15 @@ goUpArrow.style.display = 'none';
 function displayArrow() {
   const scrollPos = window.scrollY;
 
-  goUpArrow.style.display = scrollPos <= 100 ? "none" : "block";
-  timeout = setTimeout(() => { if (scrollPos === window.scrollY && (!goUpArrow.matches(':hover'))) goUpArrow.style.display = "none" }, 2000);
+  goUpArrow.style.display = scrollPos >= 100 ? "block" : "none";
+  timeout = setTimeout(() => {
+    if (
+      scrollPos === window.scrollY &&
+      (scrollPos + window.innerHeight) < document.body.scrollHeight &&
+      !goUpArrow.matches(':hover')) {
+      goUpArrow.style.display = "none"
+    }
+  }, 2000);
 }
 
 goUpArrow.addEventListener('mouseout', _ => displayArrow());
