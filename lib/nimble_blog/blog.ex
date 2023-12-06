@@ -41,16 +41,17 @@ defmodule NimbleBlog.Blog do
       raise NotFoundError, "post with id=#{id} not found"
   end
 
-  @doc """
+  @doc ~S"""
   Returns a specific %Post{} from the combination of its id and language.
   Raise if nothing is found.
 
   #### Example:
-      iex> get_post_by_id_and_lang!("post_1", "english")
-      %Post{}
+
+      iex> get_post_by_id_and_lang!("test_1", "english")
+      %Post{id: "test_1", lang: "english", author: "Simon Tirant", title: "Test 1", body: "<p>\nTest!</p>\n", illustration: "", description: "This is a test.", tags: ["test"], date: ~D[2023-01-01]}
 
       iex> get_post_by_id_and_lang!("post_1", "german")
-      ** (NotFoundError) post with both id="post_1" and lang="german" not found
+      ** (NimbleBlog.Blog.NotFoundError) post with both id=post_1 and lang=german not found
   """
   @spec get_post_by_id_and_lang!(String.t(), String.t()) :: %Post{} | NotFoundError
   def get_post_by_id_and_lang!(id, lang) do
@@ -63,14 +64,15 @@ defmodule NimbleBlog.Blog do
     all_posts() |> Enum.find(&(&1.id == id && &1.lang == lang)) || nil
   end
 
-  @doc """
+  @doc ~S"""
   Returns the other language version of the blog post if exists, if not returns `nil`.
 
   #### Example:
-      iex> check_for_translation("post_1", "french")
-      %Post{id: "post_1", lang: "english", ...}
 
-      iex> check_for_translation("post_2", "french")
+      iex> check_for_translation("test_1", "french")
+      %Post{id: "test_1", lang: "english", author: "Simon Tirant", title: "Test 1", body: "<p>\nTest!</p>\n", illustration: "", description: "This is a test.", tags: ["test"], date: ~D[2023-01-01]}
+
+      iex> check_for_translation("test_2", "french")
       nil
   """
   @spec check_for_translation(String.t(), String.t()) :: %Post{} | nil
@@ -80,15 +82,16 @@ defmodule NimbleBlog.Blog do
     get_post_by_id_and_lang(id, alt_lang)
   end
 
-  @doc """
+  @doc ~S"""
   Gets the list of posts filtered by a specific tag or language or a combination of both.
 
   Example:
-      iex> list_posts_by_filters!(%{tag: "elixir", lang: "english"})
-      [%Post{lang: "english", tags: ["elixir", ...]}, ...]
 
-      iex> list_posts_by_filters!(%{tag: "cooking", lang: "sumerian"})
-      ** (NoBlogPostsError) posts no found with tag cooking in sumerian language.
+      iex> list_posts_by_filters!(%{"tag" => "test", "lang" => "english"})
+      [%Post{id: "test_1", lang: "english", author: "Simon Tirant", title: "Test 1", body: "<p>\nTest!</p>\n", illustration: "", description: "This is a test.", tags: ["test"], date: ~D[2023-01-01]}]
+
+      iex> list_posts_by_filters!(%{"tag" => "cooking", "lang" => "sumerian"})
+      ** (NimbleBlog.Blog.NoBlogPostsError) posts no found with tag cooking in sumerian language.
   """
   @spec list_posts_by_filters!(%{tag: String.t() | nil, lang: String.t() | nil}) ::
           [%Post{}] | NoBlogPostsError
