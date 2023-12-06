@@ -5,7 +5,8 @@ defmodule NimbleBlogWeb.ErrorHTMLTest do
   import Phoenix.Template
 
   test "renders 404.html" do
-    assert render_to_string(NimbleBlogWeb.ErrorHTML, "404", "html", []) == "Not Found"
+    assert render_to_string(NimbleBlogWeb.ErrorHTML, "404", "html", []) =~
+             "Oops! This page doesn't seem to exist ..."
   end
 
   test "renders 500.html" do
