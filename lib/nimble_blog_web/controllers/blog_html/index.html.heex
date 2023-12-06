@@ -1,5 +1,5 @@
 <%= if @tag_filter != "all" || @lang_filter != "all" do %><.link patch="/">← All blog posts</.link><% end %>
-<h2 class="">All <%= @tag_filter != "all" && "`#{@tag_filter}`" || nil %> blog posts <%= @lang_filter != "all" && "in #{@lang_filter}" || nil %>: </h2>
+<h2 class="">All <%= @tag_filter != "all" && "`#{@tag_filter}`" || nil %>blog posts<%= @lang_filter != "all" && "in #{@lang_filter}" || nil %>: </h2>
 
 <%= for post <- @posts do %>
   <div id={post.id <> "-" <> post.lang} class="post-item rounded border-2 p-4" style="margin-bottom: 3rem;">
