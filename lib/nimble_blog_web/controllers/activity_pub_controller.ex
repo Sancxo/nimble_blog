@@ -8,7 +8,7 @@ defmodule NimbleBlogWeb.ActivityPubController do
         "https://blog.simontirant.dev/@blog"
       ],
       links: [
-        {
+        %{
           rel: "self",
           type: "application/activity+json",
           href: "https://blog.simontirant.dev/@blog"
