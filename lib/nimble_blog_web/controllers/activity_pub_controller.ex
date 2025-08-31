@@ -3,15 +3,15 @@ defmodule NimbleBlogWeb.ActivityPubController do
 
   def webfinger(conn, _) do
     json(conn, %{
-      "subject": "acct:@blog@blog.simontirant.dev",
-      "aliases": [
+      subject: "acct:@blog@blog.simontirant.dev",
+      aliases: [
         "https://blog.simontirant.dev/@blog"
       ],
-      "links": [
+      links: [
         {
-          "rel": "self",
-          "type": "application/activity+json",
-          "href": "https://blog.simontirant.dev/@blog"
+          rel: "self",
+          type: "application/activity+json",
+          href: "https://blog.simontirant.dev/@blog"
         }
       ]
     })
