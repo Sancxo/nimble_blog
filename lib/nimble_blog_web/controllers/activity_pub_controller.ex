@@ -2,7 +2,7 @@ defmodule NimbleBlogWeb.ActivityPubController do
   use NimbleBlogWeb, :controller
 
   def webfinger(conn, _) do
-    json(conn, %{
+    json = %{
       subject: "acct:@blog@blog.simontirant.dev",
       aliases: [
         "https://blog.simontirant.dev/@blog"
@@ -14,6 +14,8 @@ defmodule NimbleBlogWeb.ActivityPubController do
           href: "https://blog.simontirant.dev/@blog"
         }
       ]
-    })
+    }
+
+    send_download(conn, {:binary, json})
   end
 end
