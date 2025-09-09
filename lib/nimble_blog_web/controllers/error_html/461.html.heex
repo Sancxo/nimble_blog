@@ -15,23 +15,38 @@
     <header class="px-4 sm:px-6 lg:px-8">
       <div class="flex items-center justify-between py-6 text-sm">
         <div id="brand-logo" class="flex items-center gap-4 h-9">
-          <a href={ Application.get_env(:nimble_blog, :website_url) } class="text-2xl text-future-blue font-pixel" >
+          <a
+            href={Application.get_env(:nimble_blog, :website_url)}
+            class="text-2xl text-future-blue font-pixel"
+          >
             ST
           </a>
         </div>
       </div>
-      <div id="brand-name" class="flex justify-center items-center gap-4 font-semibold leading-6 text-zinc-900">
+      <div
+        id="brand-name"
+        class="flex justify-center items-center gap-4 font-semibold leading-6 text-zinc-900"
+      >
         <h1 class="text-future-blue rounded-full px-2 font-pixel font-medium">
-          <.link patch={"/"} class="text-future-blue font-pixel">Simon Tirant's blog</.link>
+          <.link patch="/" class="text-future-blue font-pixel">Simon Tirant's blog</.link>
         </h1>
       </div>
     </header>
 
     <main class="px-4 py-20 sm:px-6 lg:px-8">
       <div class="mx-auto max-w-2xl">
-        <h2 class="">All <%= @conn.params["tag"] != "all" && "`#{@conn.params["tag"]}`" || nil %> blog posts <%= @conn.params["lang"] != "all" && "in #{@conn.params["lang"]}" || nil %>: </h2>
+        <h2 class="">
+          All <%= (@conn.params["tag"] != "all" && "`#{@conn.params["tag"]}`") || nil %> blog posts <%= (@conn.params[
+                                                                                                           "lang"
+                                                                                                         ] !=
+                                                                                                           "all" &&
+                                                                                                           "in #{@conn.params["lang"]}") ||
+            nil %>:
+        </h2>
 
-        <p>Oops! No posts found with tag `<%= @conn.params["tag"] %>` in <%= @conn.params["lang"] %> language ...</p>
+        <p>
+          Oops! No posts found with tag `<%= @conn.params["tag"] %>` in <%= @conn.params["lang"] %> language ...
+        </p>
         <.link patch="/" class="text-future-blue text-center">&lt; Go back to root</.link>
       </div>
     </main>

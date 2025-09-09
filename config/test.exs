@@ -8,8 +8,7 @@ config :nimble_blog, NimbleBlogWeb.Endpoint,
   server: false
 
 # In test we don't send emails.
-config :nimble_blog, NimbleBlog.Mailer,
-  adapter: Swoosh.Adapters.Test
+config :nimble_blog, NimbleBlog.Mailer, adapter: Swoosh.Adapters.Test
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false

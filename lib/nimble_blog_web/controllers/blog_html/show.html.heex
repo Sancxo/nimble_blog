@@ -6,8 +6,14 @@
   <meta property="og:author" content={@post.author} />
   <meta property="og:title" content={@post.title} />
   <meta property="og:description" content={@post.description} />
-  <meta property="og:image" content={Application.get_env(:nimble_blog, :blog_url) <> @post.illustration} />
-  <meta property="og:url" content={Application.get_env(:nimble_blog, :website_url) <> @post.id <> "/" <> @post.lang} />
+  <meta
+    property="og:image"
+    content={Application.get_env(:nimble_blog, :blog_url) <> @post.illustration}
+  />
+  <meta
+    property="og:url"
+    content={Application.get_env(:nimble_blog, :website_url) <> @post.id <> "/" <> @post.lang}
+  />
   <meta property="og:site_name" content={Application.get_env(:nimble_blog, :website_name)} />
   <%= if @post.lang == "french" do %>
     <meta property="og:locale" content="fr_FR" />
@@ -18,14 +24,17 @@
   <meta property="og:article:author" content={@post.author} />
   <meta property="og:article:published_time" content={@post.date} />
   <%= for tag <- @post.tags do %>
-      <meta property="og:article:tag" content={tag} />
+    <meta property="og:article:tag" content={tag} />
   <% end %>
 
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:creator" content="@LeTirant0" />
   <meta name="twitter:title" content={@post.title} />
   <meta name="twitter:description" content={@post.description} />
-  <meta name="twitter:image" content={Application.get_env(:nimble_blog, :blog_url) <> @post.illustration} />
+  <meta
+    name="twitter:image"
+    content={Application.get_env(:nimble_blog, :blog_url) <> @post.illustration}
+  />
 </div>
 
 <.link patch="/">← All blog posts</.link>
@@ -34,7 +43,10 @@
   <img src={@post.illustration} alt={@post.illustration_alt} class="w-full mx-auto my-8" />
   <h1><%= @post.title %></h1>
 
-  <p><time><%= @post.date %></time> by <%= @post.author %> (<%= @post.body |> Blog.get_reading_duration() %> min read)</p>
+  <p>
+    <time><%= @post.date %></time>
+    by <%= @post.author %> (<%= @post.body |> Blog.get_reading_duration() %> min read)
+  </p>
 
   <p id="post-tags">
     Tagged as
@@ -44,12 +56,20 @@
   </p>
 
   <%= case Blog.check_for_translation(@post.id, @post.lang) do %>
-    <% nil -> %> <%= nil %>
+    <% nil -> %>
+      <%= nil %>
     <% translated_post = %Blog.Post{} -> %>
-      <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"} class="text-future-blue">This post also exists in <%= translated_post.lang %></.link></p>
-  <% end  %>
+      <p class="text-center">
+        <.link
+          patch={"/post/#{translated_post.id}/#{translated_post.lang}"}
+          class="text-future-blue"
+        >
+          This post also exists in <%= translated_post.lang %>
+        </.link>
+      </p>
+  <% end %>
 
   <div class="post-body">
-    <%= raw @post.body %>
+    <%= raw(@post.body) %>
   </div>
 </article>

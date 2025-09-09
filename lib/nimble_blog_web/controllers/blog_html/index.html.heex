@@ -1,29 +1,53 @@
-<%= if @tag_filter != "all" || @lang_filter != "all" do %><.link patch="/">← All blog posts</.link><% end %>
-<h2 class="">All <%= @tag_filter != "all" && "`#{@tag_filter}`" || nil %>blog posts<%= @lang_filter != "all" && "in #{@lang_filter}" || nil %>: </h2>
+<%= if @tag_filter != "all" || @lang_filter != "all" do %>
+  <.link patch="/">← All blog posts</.link>
+<% end %>
+<h2 class="">
+  All <%= (@tag_filter != "all" && "`#{@tag_filter}`") || nil %>blog posts<%= (@lang_filter !=
+                                                                                 "all" &&
+                                                                                 "in #{@lang_filter}") ||
+    nil %>:
+</h2>
 
 <%= for post <- @posts do %>
-  <div id={post.id <> "-" <> post.lang} class="post-item rounded border-2 p-4" style="margin-bottom: 3rem;">
+  <div
+    id={post.id <> "-" <> post.lang}
+    class="post-item rounded border-2 p-4"
+    style="margin-bottom: 3rem;"
+  >
     <h3>
       <.link patch={"/post/#{post.id}/#{post.lang}"}>
-        <img src={post.illustration}  alt={post.illustration_alt} class="w-full mx-auto my-8" />
+        <img src={post.illustration} alt={post.illustration_alt} class="w-full mx-auto my-8" />
         <span class="font-pixel-hair text-xl font-bold">|></span> <%= post.title %>
       </.link>
     </h3>
 
-    <p><%= post.author %> (<.link patch={"/lang/#{post.lang}/tag/#{@tag_filter}"} class="text-ultra-violet font-bold"><%= post.lang %></.link>), <%= post.date |> Blog.get_time_from_now() %> - <%= post.body |> Blog.get_reading_duration() %> min read:</p>
+    <p>
+      <%= post.author %> (<.link
+        patch={"/lang/#{post.lang}/tag/#{@tag_filter}"}
+        class="text-ultra-violet font-bold"
+      ><%= post.lang %></.link>), <%= post.date |> Blog.get_time_from_now() %> - <%= post.body
+      |> Blog.get_reading_duration() %> min read:
+    </p>
 
     <p><%= raw(post.description) %></p>
 
     <p id="post-tags">
       Tagged as
       <%= for tag <- post.tags do %>
-        <.link patch={"/lang/#{@lang_filter}/tag/#{tag}"} class="text-ultra-violet font-bold"><%= tag %></.link>
+        <.link patch={"/lang/#{@lang_filter}/tag/#{tag}"} class="text-ultra-violet font-bold">
+          <%= tag %>
+        </.link>
       <% end %>
     </p>
     <%= case Blog.check_for_translation(post.id, post.lang) do %>
-      <% nil -> %> <%= nil %>
+      <% nil -> %>
+        <%= nil %>
       <% translated_post = %Blog.Post{} -> %>
-        <p class="text-center"><.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"}>Also available in <%= translated_post.lang %></.link></p>
-    <% end  %>
+        <p class="text-center">
+          <.link patch={"/post/#{translated_post.id}/#{translated_post.lang}"}>
+            Also available in <%= translated_post.lang %>
+          </.link>
+        </p>
+    <% end %>
   </div>
 <% end %>
