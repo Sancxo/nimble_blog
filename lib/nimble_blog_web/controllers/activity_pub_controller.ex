@@ -52,8 +52,17 @@ defmodule NimbleBlogWeb.ActivityPubController do
         "@type": "Key",
         id: "https://blog.simontirant.dev/@blog#main-key",
         owner: "https://blog.simontirant.dev/@blog",
-        publicKeyPem:
-          "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA68oSTjzLryZ+lLIu8N5+\nCZdQPKaN6xZCY93uzJ8b4wjOecEykQcGU2J+ejOzMXHP4o4N+Rc0xnxyAs9ZN5AX\ndYSObpdfGQvrvdHanu+iTyRKETKMbSHtJzk5dZW8l+pPnX2YWKVgSfCG2SALZprg\nzxyhbtTLq8JoN8b5TgEA1B12Rya3aBNNXDT1/eeU+/HqwtKN2nLAdvACbccPAtg1\nVeKdcSgmS2o51JR4MjJWcCgM2HrAZUepF1XM59Yeq136QGviJpfAFX6gS7POvi7r\n3iaH0GzuUzR+WJSHgoJ65VzC9wy4Vpw/jt8CNtlW13iFRasHARTwFe+1FhuZayPG\neQIDAQAB\n-----END PUBLIC KEY-----"
+        publicKeyPem: """
+        -----BEGIN PUBLIC KEY-----
+        MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwx9WX3qvmX8m+SrtaEnV
+        WJFYiurnh3GpAGD+Luzlm/H/pKM7dY9XigWXkJtUhLS/w7ucEdejaFoQYYAg4BL9
+        lMEZPOljp7CBhO0Qgn6DTxolaCQhCfD0+W751Gr5uA+RGzRgtk6wf2oUChVE5nN6
+        3H/YiqqfgDAFwV9giq7KxbfeCdSXWpt/MUqbI0mkAxWzp5kHAhpu0fsmo/Alktku
+        XD48sRIcWTuZVb6l3qvTdHxVsFvtLA+NWUcKbRtc79l/mPhBVeiXeq9/qxvD8+qp
+        E5RArkoAAGfY//MW7a6BAWx5mre3L2Z35mTvNXQ9x+JroKKtgRIVzRDZ3JM+l4rb
+        FQIDAQAB
+        -----END PUBLIC KEY-----
+        """
       },
       attachement: [
         %{
