@@ -25,7 +25,7 @@ defmodule NimbleBlogWeb.Router do
     get "/.well-known/webfinger", ActivityPubController, :webfinger
     get "/@blog", ActivityPubController, :actor
     post "/socialweb/inbox", ActivityPubController, :inbox
-    post "/socialweb/outbox", ActivityPubController, :outbox
+    get "/socialweb/outbox", ActivityPubController, :outbox
   end
 
   # Other scopes may use custom stacks.
