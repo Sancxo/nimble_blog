@@ -13,7 +13,8 @@ defmodule NimbleBlogWeb.Router do
   pipeline :social_web do
     plug :accepts, ["json"]
     plug :protect_from_forgery
-    plug :put_secure_browser_headers, %{"content-type": "application/activity+json;"}
+    plug :put_secure_browser_headers
+    plug :put_resp_content_type, "application/activity+json"
   end
 
   pipeline :api do
