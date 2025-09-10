@@ -10,13 +10,6 @@ defmodule NimbleBlogWeb.Router do
     plug :put_secure_browser_headers
   end
 
-  pipeline :social_web do
-    plug :accepts, ["json"]
-    plug :protect_from_forgery
-    plug :put_secure_browser_headers
-    plug :put_resp_content_type, "application/activity+json"
-  end
-
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -28,11 +21,7 @@ defmodule NimbleBlogWeb.Router do
     get "/post/:id/:lang", BlogController, :show
 
     get "/lang/:lang/tag/:tag", BlogController, :filter
-  end
-
-  scope "/", NimbleBlogWeb do
-    pipe_through :social_web
-
+    
     get "/.well-known/webfinger", ActivityPubController, :webfinger
     get "/@blog", ActivityPubController, :actor
     post "/socialweb/inbox", ActivityPubController, :inbox
