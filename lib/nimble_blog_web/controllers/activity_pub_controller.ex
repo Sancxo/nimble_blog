@@ -3,7 +3,7 @@ defmodule NimbleBlogWeb.ActivityPubController do
 
   def webfinger(conn, _) do
     json(conn, %{
-      subject: "acct:@blog@blog.simontirant.dev",
+      subject: "acct:blog@blog.simontirant.dev",
       aliases: [
         "https://blog.simontirant.dev/@blog"
       ],
