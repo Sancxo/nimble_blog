@@ -21,7 +21,11 @@ defmodule NimbleBlogWeb.Router do
     get "/post/:id/:lang", BlogController, :show
 
     get "/lang/:lang/tag/:tag", BlogController, :filter
-    
+  end
+
+  scope "/", NimbleBlogWeb do
+    pipe_through :api
+
     get "/.well-known/webfinger", ActivityPubController, :webfinger
     get "/@blog", ActivityPubController, :actor
     post "/socialweb/inbox", ActivityPubController, :inbox

@@ -1,5 +1,5 @@
 defmodule NimbleBlogWeb.ActivityPubJSON do
-  def webfinger() do
+  def webfinger(_) do
     %{
       subject: "acct:blog@blog.simontirant.dev",
       aliases: [
@@ -20,7 +20,7 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
     }
   end
 
-  def actor() do
+  def actor(_) do
     %{
       "@context": "https://www.w3.org/ns/activitystreams",
       id: "https://blog.simontirant.dev/@blog",
