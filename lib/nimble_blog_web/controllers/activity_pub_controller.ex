@@ -8,6 +8,6 @@ defmodule NimbleBlogWeb.ActivityPubController do
   def actor(conn, _) do
     conn |> IO.inspect(label: "conn")
 
-    render(conn, :actor)
+    render(conn, :actor) |> IO.inspect(label: "render")
   end
 end
