@@ -68,19 +68,19 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
       },
       attachment: [
         %{
-          type: "http://schema.org#PropertyValue",
+          type: "PropertyValue",
           name: "Blog",
           value:
             "<a href=\"https://simontirant.dev\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\">https://simontirant.dev</a>"
         },
         %{
-          type: "http://schema.org#PropertyValue",
+          type: "PropertyValue",
           name: "LinkedIn",
           value:
             "<a href=\"https://www.linkedin.com/in/simontirant\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\">https://www.linkedin.com/in/simontirant</a>"
         },
         %{
-          type: "http://schema.org#PropertyValue",
+          type: "PropertyValue",
           name: "GitHub",
           value:
             "<a href=\"https://github.com/Sancxo\" target=\"_blank\" rel=\"nofollow noopener noreferrer me\" translate=\"no\">https://github.com/Sancxo</a>"
