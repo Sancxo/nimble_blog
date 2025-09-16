@@ -66,7 +66,7 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
         -----END PUBLIC KEY-----
         """
       },
-      attachement: [
+      attachment: [
         %{
           type: "PropertyValue",
           name: "Blog",
