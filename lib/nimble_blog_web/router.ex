@@ -12,7 +12,7 @@ defmodule NimbleBlogWeb.Router do
 
   pipeline :api do
     plug :accepts, ["json"]
-    plug :put_resp_content_type, "application/jrd+json"
+    plug :put_resp_content_type, "application/activity+json"
   end
 
   scope "/", NimbleBlogWeb do
