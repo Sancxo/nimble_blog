@@ -6,6 +6,8 @@ defmodule NimbleBlogWeb.ActivityPubController do
   end
 
   def actor(conn, _) do
+    conn |> IO.inspect(label: "conn")
+
     render(conn, :actor)
   end
 end
