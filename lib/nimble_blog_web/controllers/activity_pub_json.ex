@@ -22,7 +22,10 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
 
   def actor(_) do
     %{
-      "@context": "https://www.w3.org/ns/activitystreams",
+      "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        "https://w3id.org/security/v1"
+      ],
       id: "https://blog.simontirant.dev/@blog",
       type: "Person",
       following: "https://mastodon.social/users/sancxo/following",
@@ -32,9 +35,12 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
       preferredUsername: "blog",
       name: "Simon Tirant's blog",
       summary: "Some Elixir language tech articles, mostly in french.",
-      url: "https://blog.simontirant.dev",
+      url: "https://blog.simontirant.dev/@blog",
       discoverable: true,
+      indexable: true,
+      manuallyApprovesFollowers: false,
       memorial: false,
+      published: "2025-08-17T00:00:00Z",
       icon: %{
         type: "Image",
         mediaType: "image/png",
@@ -46,8 +52,6 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
         url: "https://simontirant.dev/static/media/simon_tirant_img.0b14a05ffa9736bd7d1b.JPG"
       },
       publicKey: %{
-        "@context": "https://w3id.org/security/v1",
-        "@type": "Key",
         id: "https://blog.simontirant.dev/@blog#main-key",
         owner: "https://blog.simontirant.dev/@blog",
         publicKeyPem: """
