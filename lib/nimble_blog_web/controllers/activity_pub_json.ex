@@ -35,7 +35,7 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
       preferredUsername: "blog",
       name: "Simon Tirant's blog",
       summary: "Some Elixir language tech articles, mostly in french.",
-      url: "https://blog.simontirant.dev/@blog",
+      url: "https://blog.simontirant.dev",
       discoverable: true,
       indexable: true,
       manuallyApprovesFollowers: false,
