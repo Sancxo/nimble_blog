@@ -10,12 +10,12 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
           rel: "self",
           type: "application/activity+json",
           href: "https://blog.simontirant.dev/@blog"
+        },
+        %{
+          rel: "https://webfinger.net/rel/profile-page",
+          type: "text/html",
+          href: "https://blog.simontirant.dev/"
         }
-        #  %{
-        #    rel: "http://webfinger.net/rel/profile-page",
-        #    type: "text/html",
-        #    href: "https://blog.simontirant.dev/"
-        #  }
       ]
     }
   end
