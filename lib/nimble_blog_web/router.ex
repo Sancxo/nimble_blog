@@ -19,7 +19,7 @@ defmodule NimbleBlogWeb.Router do
     pipe_through :browser
 
     get "/", BlogController, :index
-    get "/post/:id", BlogController, :show
+    get "/:id", BlogController, :show
     get "/post/:id/lang/:lang", BlogController, :show
     get "/tags/:tag", BlogController, :tags
     get "/lang/:lang/tag/:tag", BlogController, :filter
