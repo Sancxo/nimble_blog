@@ -105,7 +105,7 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
   defp jsonify_note(article) do
     %{
       "@context": "https://www.w3.org/ns/activitystreams",
-      id: "https://blog.simontirant.dev/notes/#{article.id}",
+      id: "https://blog.simontirant.dev/socialweb/notes/#{article.id}",
       type: "Note",
       content: article.body,
       url: "https://blog.simontirant.dev/#{article.id}",
