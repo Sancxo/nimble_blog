@@ -103,10 +103,10 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
   defp jsonify_article(article) do
     %{
       "@context": "https://www.w3.org/ns/activitystreams",
-      id: "https://blog.smontirant.dev/#{article.id}",
+      id: "https://blog.simontirant.dev/#{article.id}",
       type: "Note",
       content: article.body,
-      url: "https://blog.smontirant.dev/#{article.id}",
+      url: "https://blog.simontirant.dev/#{article.id}",
       attributedTo: "https://blog.simontirant.dev/@blog",
       to: ["https://www.w3.org/ns/activitystreams#Public"],
       cc: [],
