@@ -23,18 +23,18 @@ defmodule NimbleBlogWeb.BlogController do
         lang_filter: "all"
       )
 
-  def show(conn, %{"id" => id}),
-    do:
-      render(conn, "show.html",
-        post: Blog.get_post_by_id_and_lang!(id),
-        tag_filter: "all",
-        lang_filter: "all"
-      )
-
   def show(conn, %{"id" => id, "lang" => lang}),
     do:
       render(conn, "show.html",
         post: Blog.get_post_by_id_and_lang!(id, lang),
+        tag_filter: "all",
+        lang_filter: "all"
+      )
+
+  def show(conn, %{"id" => id}),
+    do:
+      render(conn, "show.html",
+        post: Blog.get_post_by_id!(id),
         tag_filter: "all",
         lang_filter: "all"
       )

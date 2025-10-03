@@ -10,6 +10,13 @@ defmodule NimbleBlogWeb.ActivityPubController do
   end
 
   def outbox(conn, _) do
-    render(conn, :outbox)
+    posts_count = NimbleBlog.Blog.count_all_unique_posts()
+    posts_list = NimbleBlog.Blog.all_posts() |> Enum.dedup_by(& &1.id)
+
+    render(conn, :outbox, posts_count: posts_count, posts_list: posts_list)
+  end
+
+  def note(conn, %{"id" => id}) do
+    render(conn, :note, id: id)
   end
 end

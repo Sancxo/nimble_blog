@@ -89,21 +89,23 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
     }
   end
 
-  def outbox(_) do
+  def outbox(%{posts_count: posts_count, posts_list: posts_list}) do
     %{
       "@context": "https://www.w3.org/ns/activitystreams",
       id: "https://blog.simontirant.dev/socialweb/outbox",
       type: "OrderedCollection",
       summary: "Some Elixir language tech articles, mostly in french.",
-      totalItems: NimbleBlog.Blog.count_all_unique_posts(),
-      orderedItems: NimbleBlog.Blog.all_posts() |> Enum.dedup_by(& &1.id) |> Enum.map(& jsonify_article(&1))
+      totalItems: posts_count,
+      orderedItems: Enum.map(posts_list, &jsonify_note(&1))
     }
   end
 
-  defp jsonify_article(article) do
+  def note(%{id: id}), do: NimbleBlog.Blog.get_post_by_id!(id) |> jsonify_note()
+
+  defp jsonify_note(article) do
     %{
       "@context": "https://www.w3.org/ns/activitystreams",
-      id: "https://blog.simontirant.dev/#{article.id}",
+      id: "https://blog.simontirant.dev/notes/#{article.id}",
       type: "Note",
       content: article.body,
       url: "https://blog.simontirant.dev/#{article.id}",

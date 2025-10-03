@@ -32,6 +32,7 @@ defmodule NimbleBlogWeb.Router do
     get "/@blog", ActivityPubController, :actor
     post "/socialweb/inbox", ActivityPubController, :inbox
     get "/socialweb/outbox", ActivityPubController, :outbox
+    get "/socialweb/notes/:id", ActivityPubController, :note
   end
 
   # Other scopes may use custom stacks.
