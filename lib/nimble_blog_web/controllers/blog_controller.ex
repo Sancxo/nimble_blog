@@ -15,6 +15,22 @@ defmodule NimbleBlogWeb.BlogController do
     render(conn, "index.html", posts: posts, tag_filter: "all", lang_filter: "all")
   end
 
+  def tags(conn, %{"tag" => tag}),
+    do:
+      render(conn, "index.html",
+        posts: Blog.list_posts_by_tag!(tag) |> Enum.dedup_by(& &1.id),
+        tag_filter: tag,
+        lang_filter: "all"
+      )
+
+  def show(conn, %{"id" => id}),
+    do:
+      render(conn, "show.html",
+        post: Blog.get_post_by_id_and_lang!(id),
+        tag_filter: "all",
+        lang_filter: "all"
+      )
+
   def show(conn, %{"id" => id, "lang" => lang}),
     do:
       render(conn, "show.html",

@@ -88,4 +88,50 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
       ]
     }
   end
+
+  def outbox(_) do
+    %{
+      "@context": "https://www.w3.org/ns/activitystreams",
+      id: "https://blog.simontirant.dev/socialweb/outbox",
+      type: "OrderedCollection",
+      summary: "Some Elixir language tech articles, mostly in french.",
+      totalItems: NimbleBlog.Blog.count_all_unique_posts(),
+      orderedItems: NimbleBlog.Blog.all_posts() |> Enum.dedup_by(& &1.id) |> Enum.map(& jsonify_article(&1))
+    }
+  end
+
+  defp jsonify_article(article) do
+    %{
+      "@context": "https://www.w3.org/ns/activitystreams",
+      id: "https://blog.smontirant.dev/#{article.id}",
+      type: "Note",
+      content: article.body,
+      url: "https://blog.smontirant.dev/#{article.id}",
+      attributedTo: "https://blog.simontirant.dev/@blog",
+      to: ["https://www.w3.org/ns/activitystreams#Public"],
+      cc: [],
+      published: article.date,
+      tag: get_tags(article.tags),
+      replies: %{}
+    }
+  end
+
+  defp get_tags(tags) do
+    tag_list =
+      Enum.map(tags, fn tag ->
+        %{
+          Type: "Hashtag",
+          Href: "https://blog.simontirant.dev/tags/#{tag}",
+          Name: "##{tag}"
+        }
+      end)
+
+    mention_tag = %{
+      Type: "Mention",
+      Href: "https://mastodon.social/users/sancxo",
+      Name: "@sancxo@mastodon.social"
+    }
+
+    [mention_tag | tag_list]
+  end
 end

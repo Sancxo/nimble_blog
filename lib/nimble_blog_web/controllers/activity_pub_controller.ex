@@ -8,4 +8,8 @@ defmodule NimbleBlogWeb.ActivityPubController do
   def actor(conn, _) do
     render(conn, :actor)
   end
+
+  def outbox(conn, _) do
+    render(conn, :outbox)
+  end
 end

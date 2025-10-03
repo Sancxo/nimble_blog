@@ -12,7 +12,7 @@
   />
   <meta
     property="og:url"
-    content={Application.get_env(:nimble_blog, :website_url) <> @post.id <> "/" <> @post.lang}
+    content={Application.get_env(:nimble_blog, :website_url) <> @post.id <> "/lang/" <> @post.lang}
   />
   <meta property="og:site_name" content={Application.get_env(:nimble_blog, :website_name)} />
   <%= if @post.lang == "french" do %>
@@ -28,7 +28,7 @@
   <% end %>
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:creator" content="@LeTirant0" />
+  <meta name="twitter:creator" content="Simon Tirant" />
   <meta name="twitter:title" content={@post.title} />
   <meta name="twitter:description" content={@post.description} />
   <meta
@@ -61,7 +61,7 @@
     <% translated_post = %Blog.Post{} -> %>
       <p class="text-center">
         <.link
-          patch={"/post/#{translated_post.id}/#{translated_post.lang}"}
+          patch={"/post/#{translated_post.id}/lang/#{translated_post.lang}"}
           class="text-future-blue"
         >
           This post also exists in <%= translated_post.lang %>

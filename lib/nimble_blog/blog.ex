@@ -19,6 +19,7 @@ defmodule NimbleBlog.Blog do
 
   # And finally export them
   def all_posts, do: @posts
+  def count_all_unique_posts, do: all_posts() |> Enum.dedup_by(& &1.id) |> Enum.count()
   def all_tags, do: @tags
 
   # Important: Avoid injecting the @posts attribute into multiple functions, as each call will make a complete copy of all posts.
@@ -41,6 +42,11 @@ defmodule NimbleBlog.Blog do
       raise NotFoundError, "post with id=#{id} not found"
   end
 
+  def get_post_by_id_and_lang!(id) do
+    Enum.find(all_posts(), &(&1.id == id)) ||
+      raise NotFoundError, "post with id=#{id} not found"
+  end
+
   @doc ~S"""
   Returns a specific %Post{} from the combination of its id and language.
   Raise if nothing is found.
@@ -59,7 +65,7 @@ defmodule NimbleBlog.Blog do
       raise NotFoundError, "post with both id=#{id} and lang=#{lang} not found"
   end
 
-  @spec get_post_by_id_and_lang(String.t(), Sting.t()) :: %Post{} | nil
+  @spec get_post_by_id_and_lang(String.t(), String.t()) :: %Post{} | nil
   defp get_post_by_id_and_lang(id, lang) do
     all_posts() |> Enum.find(&(&1.id == id && &1.lang == lang)) || nil
   end
@@ -109,7 +115,7 @@ defmodule NimbleBlog.Blog do
     end
   end
 
-  defp list_posts_by_tag!(tag) do
+  def list_posts_by_tag!(tag) do
     case Enum.filter(all_posts(), &(tag in &1.tags)) do
       [] -> raise NoBlogPostsError, "posts with tag=#{tag} not found"
       posts -> posts
