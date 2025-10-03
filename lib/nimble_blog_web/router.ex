@@ -29,7 +29,7 @@ defmodule NimbleBlogWeb.Router do
     pipe_through :api
 
     get "/.well-known/webfinger", ActivityPubController, :webfinger
-    get "/@blog", ActivityPubController, :actor
+    get "/socialweb/@blog", ActivityPubController, :actor
     post "/socialweb/inbox", ActivityPubController, :inbox
     get "/socialweb/outbox", ActivityPubController, :outbox
     get "/socialweb/notes/:id", ActivityPubController, :note

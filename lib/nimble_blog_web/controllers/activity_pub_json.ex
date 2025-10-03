@@ -3,13 +3,13 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
     %{
       subject: "acct:blog@blog.simontirant.dev",
       aliases: [
-        "https://blog.simontirant.dev/@blog"
+        "https://blog.simontirant.dev/socialweb/@blog"
       ],
       links: [
         %{
           rel: "self",
           type: "application/activity+json",
-          href: "https://blog.simontirant.dev/@blog"
+          href: "https://blog.simontirant.dev/socialweb/@blog"
         },
         %{
           rel: "https://webfinger.net/rel/profile-page",
@@ -26,7 +26,7 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
         "https://www.w3.org/ns/activitystreams",
         "https://w3id.org/security/v1"
       ],
-      id: "https://blog.simontirant.dev/@blog",
+      id: "https://blog.simontirant.dev/socialweb/@blog",
       type: "Person",
       following: "https://mastodon.social/users/sancxo/following",
       followers: "https://mastodon.social/users/sancxo/followers",
@@ -52,8 +52,8 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
         url: "https://simontirant.dev/static/media/simon_tirant_img.0b14a05ffa9736bd7d1b.JPG"
       },
       publicKey: %{
-        id: "https://blog.simontirant.dev/@blog#main-key",
-        owner: "https://blog.simontirant.dev/@blog",
+        id: "https://blog.simontirant.dev/socialweb/@blog#main-key",
+        owner: "https://blog.simontirant.dev/socialweb/@blog",
         publicKeyPem: """
         -----BEGIN PUBLIC KEY-----
         MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwx9WX3qvmX8m+SrtaEnV
@@ -109,7 +109,7 @@ defmodule NimbleBlogWeb.ActivityPubJSON do
       type: "Note",
       content: article.body,
       url: "https://blog.simontirant.dev/#{article.id}",
-      attributedTo: "https://blog.simontirant.dev/@blog",
+      attributedTo: "https://blog.simontirant.dev/socialweb/@blog",
       to: ["https://www.w3.org/ns/activitystreams#Public"],
       cc: [],
       published: article.date,
